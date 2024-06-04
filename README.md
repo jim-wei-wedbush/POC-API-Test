@@ -5,9 +5,13 @@ A simple API Test POC implementation using ASP.NET Core API, and a corresponding
 ## Project Notes:
 
 - Used default WeatherForecastController class
+- Added GET route to WeatherForecastController
 - Added xUnit test project and API project reference
 - Created WeatherForecastControllerTests class, and test method Get_ReturnsWeatherForecasts(), using AAA
+- Created test method GetByDays_ReturnsWeatherForecastsForSpecifiedDays(), using AAA
 
+
+## Route 1:
 ### Arrange:
 - In test method, created mock instance of ILogger<WeatherForecastController>
 
@@ -21,7 +25,20 @@ A simple API Test POC implementation using ASP.NET Core API, and a corresponding
 	1. Not empty
 
 ## Result:
-- Test passed successfully in 971ms.
+- Test passed successfully.
+
+## Route 2:
+### Arrange:
+- In test method, created mock instance of ILogger<WeatherForecastController>
+- Initialized int days
+
+### Act:
+- Called GET method of WeatherForecastController with int parameter {days}, retrieved weather forecasts.
+
+### Assert:
+- Verified result is:
+	1. All of the above for Route 1
+	1. Length of results array is equal to {days} parameter
 
 
 ## Learnings:

@@ -15,10 +15,10 @@ namespace WeatherForecastApi.Tests
     public class WeatherForecastControllerTests
     {
 
+        // Test 1 - Route 1
         [Fact]
         public void Get_ReturnsWeatherForecasts()
         {
-            // AAA Pattern
             // Arrange
             var loggerMock = new Mock<ILogger<WeatherForecastController>>();
             var controller = new WeatherForecastController(loggerMock.Object);
@@ -30,6 +30,25 @@ namespace WeatherForecastApi.Tests
             Assert.NotNull(result);
             Assert.IsAssignableFrom<IEnumerable<WeatherForecast>>(result);
             Assert.NotEmpty(result);
+        }
+
+        // Test 2 - Route 2
+        [Fact]
+        public void GetByDays_ReturnsWeatherForecastsForSpecifiedDays()
+        {
+            // Arrange
+            var loggerMock = new Mock<ILogger<WeatherForecastController>>();
+            var controller = new WeatherForecastController(loggerMock.Object);
+            int days = 10;
+
+            // Act
+            var result = controller.GetByDays(days);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.IsAssignableFrom<IEnumerable<WeatherForecast>>(result);
+            Assert.NotEmpty(result);
+            Assert.Equal(days, result.Count());
         }
     }
 }
