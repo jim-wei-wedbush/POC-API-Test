@@ -29,4 +29,4 @@ A simple API Test POC implementation using ASP.NET Core API, and a corresponding
 - Test project can reference the API project to access its types and models without redefining.
 - AAA pattern - Arrange-Act-Assert; Keeps test methods readable and maintainable.
 - Visual Studio and Windows environment is much more compatible with .NET and C#.
-- Familarized myself with Visual Studio and its differences to VSCode.
+- Familiarized myself with Visual Studio and its differences to VSCode.
