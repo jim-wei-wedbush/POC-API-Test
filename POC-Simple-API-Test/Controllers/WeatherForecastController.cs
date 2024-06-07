@@ -20,7 +20,7 @@ namespace POC_Simple_API_Test.Controllers
         }
 
         // Route 1: GET - GetWeatherForecast
-        // Call by sending GET request to base URL of controller
+        // Generate 5 random WeatherForecast objects
         // Input: None
         // Output: Array of 5 WeatherForecast objects
         [HttpGet(Name = "GetWeatherForecast")]
@@ -36,10 +36,10 @@ namespace POC_Simple_API_Test.Controllers
         }
 
         // Route 2: GET - GetByDays, 
-        // Call by sending GET request to base URL of controller, with int parameter {days} 
+        // Generate {days} random WeatherForecast objects
         // Input: days (int)
         // Output: Array of {days} WeatherForecast objects
-        [HttpGet("{days}")]
+        [HttpGet("days/{days}")]
         public IEnumerable<WeatherForecast> GetByDays(int days)
         {
             return Enumerable.Range(1, days).Select(index => new WeatherForecast
@@ -50,5 +50,29 @@ namespace POC_Simple_API_Test.Controllers
             })
             .ToArray();
         }
+
+
+        // Route 3: GET - GetAverageTemperature,
+        // Calculate the average temperature of the next {days} days
+        // Input: days (int)
+        // Output: Average temperature (double)
+        [HttpGet("average-temperature/{days}")]
+        public double GetAverageTemperature(int days)
+        {
+            var forecasts = GetByDays(days);
+            return forecasts.Average(f => f.TemperatureC);
+        }
+
+        // Route 5: GET - GetHottestDay,
+        // Find the hottest day in the next {days} days
+        // Input: days (int)
+        // Output: Hottest day (WeatherForecast object)
+        [HttpGet("hottest-day/{days}")]
+        public WeatherForecast GetHottestDay(int days)
+        {
+            var forecasts = GetByDays(days);
+            return forecasts.OrderByDescending(f => f.TemperatureC).First();
+        }
+
     }
 }
